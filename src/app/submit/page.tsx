@@ -9,11 +9,13 @@ export default async function SubmitPage() {
   // Safe default to true if settings aren't loaded yet
   let isSubmissionsAllowed = true;
   console.log(isSubmissionsAllowed);
-  
+
   try {
     const { data: settings } = await supabase.from('settings').select('*');
     if (settings) {
-      isSubmissionsAllowed = settings.find(s => s.key === 'allow_submissions')?.value === 'false';
+      const setting = settings.find(s => s.key === 'allow_submissions');
+      isSubmissionsAllowed = setting?.value === true;
+      console.log("isSubmissionsAllowed", isSubmissionsAllowed);
     }
   } catch (e) {
     // ignore
@@ -22,14 +24,14 @@ export default async function SubmitPage() {
   async function submitProverb(formData: FormData) {
     'use server';
     const supabase = await createClient();
-    
+
     const amharic_text = formData.get('amharic_text') as string;
     const english_translation = formData.get('english_translation') as string;
     const meaning_amharic = formData.get('meaning_amharic') as string;
     const meaning_english = formData.get('meaning_english') as string;
     const suggested_category = formData.get('suggested_category') as string;
     const tagsInput = formData.get('suggested_tags') as string;
-    
+
     const suggested_tags = tagsInput.split(',').map(t => t.trim()).filter(Boolean);
 
     await supabase.from('submissions').insert({
@@ -40,17 +42,17 @@ export default async function SubmitPage() {
       suggested_category,
       suggested_tags,
     });
-    
+
 
     redirect('/submit?success=true');
   }
-console.log(isSubmissionsAllowed);
+  console.log(isSubmissionsAllowed);
   return (
     <>
       <Header />
       <main className="flex-1 max-w-[800px] mx-auto w-full px-6 py-12">
         <h1 className="font-display text-3xl text-[var(--color-earth-dark)] mb-6">Submit a Proverb</h1>
-        
+
         {!isSubmissionsAllowed ? (
           <div className="bg-[var(--color-parchment-mid)] p-6 rounded-lg text-center">
             <p>Submissions are currently disabled by the administrators.</p>

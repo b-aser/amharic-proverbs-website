@@ -1,19 +1,18 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { PROVERBS } from '@/data/proverbs';
 import { ProverbCard } from './ProverbCard';
 
 const CATEGORIES = ['all', 'wisdom', 'patience', 'unity', 'family', 'work', 'character'];
 const PAGE_SIZE = 9;
 
-export function ProverbGrid() {
+export function ProverbGrid({ initialProverbs }: { initialProverbs: any[] }) {
   const [currentCategory, setCurrentCategory] = useState('all');
   const [displayedCount, setDisplayedCount] = useState(PAGE_SIZE);
 
   const filteredProverbs = useMemo(() => {
-    return PROVERBS.filter(p => currentCategory === 'all' || p.category === currentCategory);
-  }, [currentCategory]);
+    return initialProverbs.filter(p => currentCategory === 'all' || p.category?.toLowerCase() === currentCategory);
+  }, [currentCategory, initialProverbs]);
 
   const displayedProverbs = filteredProverbs.slice(0, displayedCount);
   const hasMore = displayedCount < filteredProverbs.length;

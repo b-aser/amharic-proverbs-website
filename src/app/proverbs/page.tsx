@@ -2,6 +2,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { createClient } from '@/lib/supabase/server';
 import { ProverbCard } from '@/components/ProverbCard';
+import { getTransliteration } from '@/utils/transliterate';
 
 export default async function ProverbsPage({
   searchParams,
@@ -17,10 +18,16 @@ export default async function ProverbsPage({
     let query = supabase.from('proverbs').select('*');
 
     if (q) {
-      query = query.textSearch('search_vector', q, {
-        type: 'plain',
-        config: 'simple'
-      });
+      // Format query for prefix matching (e.g. "one" becomes "one:*", "one hand" becomes "one:* & hand:*")
+      // This enables search-as-you-type without needing the full word.
+      const formattedQuery = q
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean)
+        .map(word => `${word}:*`)
+        .join(' & ');
+
+      query = query.textSearch('search_vector', formattedQuery);
     }
 
     const { data, error: dbError } = await query.limit(20);
@@ -56,7 +63,7 @@ export default async function ProverbsPage({
                 proverb={{
                   id: p.id,
                   am: p.amharic_text,
-                  translit: p.slug, // mapping slug to translit temporarily
+                  translit: getTransliteration(p.amharic_text),
                   en: p.english_translation,
                   meaningAm: p.meaning_amharic || '',
                   meaningEn: p.meaning_english || '',

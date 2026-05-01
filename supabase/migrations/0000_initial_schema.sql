@@ -62,6 +62,7 @@ BEGIN
   NEW.search_vector := to_tsvector('simple',
     coalesce(NEW.amharic_text, '') || ' ' ||
     coalesce(NEW.english_translation, '') || ' ' ||
+    coalesce(NEW.meaning_amharic, '') || ' ' ||
     coalesce(NEW.meaning_english, '')
   );
   RETURN NEW;

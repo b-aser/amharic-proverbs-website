@@ -32,7 +32,7 @@ export default async function AdminLayout({
       <header className="bg-[var(--color-earth-dark)] text-white p-4 shadow-sm">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <Link href="/admin/submissions" className="font-serif-en font-semibold tracking-wider hover:opacity-80 transition-opacity">
-            AMHARic PROVERBS <span className="text-[var(--color-gold)]">ADMIN</span>
+            AMHARIC PROVERBS <span className="text-[var(--color-gold)]">ADMIN</span>
           </Link>
           <div className="flex gap-6 items-center">
             <Link href="/admin/submissions" className="text-sm text-white/70 hover:text-white transition-colors">Submissions</Link>

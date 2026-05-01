@@ -2,10 +2,47 @@ import { Header } from '@/components/layout/Header';
 import { Hero } from '@/components/layout/Hero';
 import { Footer } from '@/components/layout/Footer';
 import { ProverbGrid } from '@/components/ProverbGrid';
-import { PROVERBS } from '@/data/proverbs';
+import { createClient } from '@/lib/supabase/server';
+import { getTransliteration } from '@/utils/transliterate';
 import Script from 'next/script';
 
-export default function Home() {
+export const revalidate = 60; // Revalidate every 60 seconds
+
+export default async function Home() {
+  let dbProverbs: any[] = [];
+  
+  try {
+    const supabase = await createClient();
+    
+    // Fetch proverbs from database
+    const { data } = await supabase
+      .from('proverbs')
+      .select('*, proverb_tags(tags(name))')
+      .order('created_at', { ascending: false });
+      
+    if (data) {
+      dbProverbs = data;
+    }
+  } catch (error) {
+    console.error('Failed to fetch proverbs:', error);
+  }
+
+  const mappedProverbs = dbProverbs.map((p, i) => {
+    const tags = p.proverb_tags?.map((pt: any) => pt.tags?.name).filter(Boolean) || [];
+    const category = tags.length > 0 ? tags[0] : 'wisdom';
+
+    return {
+      id: p.id,
+      am: p.amharic_text,
+      en: p.english_translation,
+      meaningAm: p.meaning_amharic || '',
+      meaningEn: p.meaning_english || '',
+      translit: getTransliteration(p.amharic_text),
+      category: category,
+      featured: p.featured || (i === 0)
+    };
+  });
+
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -23,7 +60,7 @@ export default function Home() {
     "url": "https://amharicproverbs.com",
     "inLanguage": "am",
     "genre": "Proverb",
-    "hasPart": PROVERBS.slice(0, 3).map(p => ({
+    "hasPart": mappedProverbs.slice(0, 3).map(p => ({
       "@type": "CreativeWork",
       "name": p.am,
       "text": p.am,
@@ -41,11 +78,11 @@ export default function Home() {
 
       <Header />
       <main>
-        <Hero totalCount={PROVERBS.length} />
+        <Hero totalCount={mappedProverbs.length} />
         <div className="text-center text-[var(--color-gold)] text-[1.5rem] tracking-[0.5rem] pt-6 pb-2 opacity-60" aria-hidden="true">✦ ✦ ✦</div>
         
         <section id="proverbs" className="max-w-[1100px] mx-auto px-6 py-8 pb-16">
-          <ProverbGrid />
+          <ProverbGrid initialProverbs={mappedProverbs} />
         </section>
 
         <section id="about" className="max-w-[1100px] mx-auto px-6 pb-16">

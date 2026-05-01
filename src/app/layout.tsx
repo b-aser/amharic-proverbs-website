@@ -30,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="am" className={`${playfair.variable} ${sourceSerif.variable} ${notoSerifAmharic.variable}`}>
+    <html lang="am"  className={`${playfair.variable} ${sourceSerif.variable} ${notoSerifAmharic.variable}`}>
       <body className="antialiased min-h-screen flex flex-col">
         {children}
       </body>
