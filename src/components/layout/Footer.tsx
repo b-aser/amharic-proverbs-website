@@ -13,6 +13,8 @@ export function Footer() {
         <Link href="#submit" className="text-[var(--color-gold-light)] hover:underline">Submit a Proverb</Link>
         <span>·</span>
         <Link href="#about" className="text-[var(--color-gold-light)] hover:underline">About</Link>
+        <span>·</span>
+        <Link href="/login" className="text-white/30 hover:text-[var(--color-gold-light)] transition-colors">Admin Login</Link>
       </div>
       <p className="mt-4 text-[0.75rem] opacity-50">
         &copy; {new Date().getFullYear()} Amharic Proverbs Archive · Kakros Systems LLC · All rights reserved
