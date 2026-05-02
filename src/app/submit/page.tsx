@@ -1,5 +1,5 @@
 
-import { Header } from '@/components/layout/Header';
+import { DynamicHeader } from '@/components/layout/DynamicHeader';
 import { Footer } from '@/components/layout/Footer';
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
@@ -49,7 +49,7 @@ export default async function SubmitPage() {
   console.log(isSubmissionsAllowed);
   return (
     <>
-      <Header />
+      <DynamicHeader />
       <main className="flex-1 max-w-[800px] mx-auto w-full px-6 py-12">
         <h1 className="font-display text-3xl text-[var(--color-earth-dark)] mb-6">Submit a Proverb</h1>
 

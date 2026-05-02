@@ -1,4 +1,4 @@
-import { Header } from '@/components/layout/Header';
+import { DynamicHeader } from '@/components/layout/DynamicHeader';
 import { Footer } from '@/components/layout/Footer';
 import { createClient } from '@/lib/supabase/server';
 import { ProverbCard } from '@/components/ProverbCard';
@@ -40,7 +40,7 @@ export default async function ProverbsPage({
 
   return (
     <>
-      <Header />
+      <DynamicHeader />
       <main className="max-w-[1100px] mx-auto px-6 py-8 pb-16 flex-1 w-full">
         <h1 className="font-display text-3xl text-[var(--color-earth-dark)] mb-6">
           {q ? `Search Results for "${q}"` : 'All Proverbs'}

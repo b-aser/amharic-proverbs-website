@@ -28,7 +28,7 @@ export default async function AdminLayout({
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col w-full">
+    <div className="min-h-screen bg-gray-50 flex flex-col w-full" suppressHydrationWarning>
       <header className="bg-[var(--color-earth-dark)] text-white p-4 shadow-sm">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <Link href="/admin/submissions" className="font-serif-en font-semibold tracking-wider hover:opacity-80 transition-opacity">

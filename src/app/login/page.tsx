@@ -1,5 +1,5 @@
 import { login } from './actions';
-import { Header } from '@/components/layout/Header';
+import { DynamicHeader } from '@/components/layout/DynamicHeader';
 import { Footer } from '@/components/layout/Footer';
 
 export default async function LoginPage({
@@ -11,7 +11,7 @@ export default async function LoginPage({
 
   return (
     <>
-      <Header />
+      <DynamicHeader />
       <main className="flex-1 flex items-center justify-center bg-[var(--color-parchment)] py-16 px-6 w-full">
         <form className="bg-white p-8 rounded-xl shadow-[var(--shadow-card)] border border-[var(--color-border-eth)] w-full max-w-sm space-y-4">
           <h1 className="font-display text-2xl text-[var(--color-earth-dark)] text-center mb-6">Admin Sign In</h1>

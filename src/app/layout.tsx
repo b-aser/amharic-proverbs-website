@@ -31,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="am"  className={`${playfair.variable} ${sourceSerif.variable} ${notoSerifAmharic.variable}`}>
-      <body className="antialiased min-h-screen flex flex-col">
+      <body className="antialiased min-h-screen flex flex-col" suppressHydrationWarning>
         {children}
       </body>
     </html>

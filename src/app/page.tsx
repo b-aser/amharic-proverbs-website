@@ -1,4 +1,4 @@
-import { Header } from '@/components/layout/Header';
+import { DynamicHeader } from '@/components/layout/DynamicHeader';
 import { Hero } from '@/components/layout/Hero';
 import { Footer } from '@/components/layout/Footer';
 import { ProverbGrid } from '@/components/ProverbGrid';
@@ -76,7 +76,7 @@ export default async function Home() {
       <Script id="website-ld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <Script id="collection-ld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionData) }} />
 
-      <Header />
+      <DynamicHeader />
       <main>
         <Hero totalCount={mappedProverbs.length} />
         <div className="text-center text-[var(--color-gold)] text-[1.5rem] tracking-[0.5rem] pt-6 pb-2 opacity-60" aria-hidden="true">✦ ✦ ✦</div>

@@ -16,7 +16,7 @@ export function Header() {
         <nav className="hidden md:flex gap-6">
           <Link href="/proverbs" className="text-white/65 hover:text-[var(--color-gold-light)] text-[0.85rem] tracking-[0.04em] transition-colors">Proverbs</Link>
           <Link href="/#about" className="text-white/65 hover:text-[var(--color-gold-light)] text-[0.85rem] tracking-[0.04em] transition-colors">About</Link>
-          <Link href="/submit" className="text-white/65 hover:text-[var(--color-gold-light)] text-[0.85rem] tracking-[0.04em] transition-colors">Submit</Link>
+          {/* <Link href="/submit" className="text-white/65 hover:text-[var(--color-gold-light)] text-[0.85rem] tracking-[0.04em] transition-colors">Submit</Link> */}
         </nav>
       </div>
     </header>
