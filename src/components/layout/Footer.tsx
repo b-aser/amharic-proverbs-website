@@ -6,16 +6,16 @@ export function Footer() {
       <p><strong className="text-white/75 font-serif-am text-[0.88rem]">ምሳሌያዊ አነጋገሮች — Amharic Proverbs Archive</strong></p>
       <p>Preserving Ethiopian oral wisdom · Accessible to humans and AI alike</p>
       <div className="mt-2 space-x-3">
-        <Link href="/sitemap.xml" className="text-[var(--color-gold-light)] hover:underline">Sitemap</Link>
-        <span>·</span>
+        {/* <Link href="/sitemap.xml" className="text-[var(--color-gold-light)] hover:underline">Sitemap</Link> */}
+        {/* <span>·</span>
         <Link href="/api/proverbs.json" className="text-[var(--color-gold-light)] hover:underline">JSON API</Link>
         <span>·</span>
         <Link href="#submit" className="text-[var(--color-gold-light)] hover:underline">Submit a Proverb</Link>
-        <span>·</span>
+        <span>·</span> */}
         <Link href="#about" className="text-[var(--color-gold-light)] hover:underline">About</Link>
       </div>
       <p className="mt-4 text-[0.75rem] opacity-50">
-        &copy; {new Date().getFullYear()} Amharic Proverbs Archive · Kakros Systems LLC · All rights reserved
+        &copy; {new Date().getFullYear()} Amharic Proverbs Archive · <Link href="https://github.com/b-aser" className="hover:underline">B-aser</Link> · All rights reserved
       </p>
     </footer>
   );
